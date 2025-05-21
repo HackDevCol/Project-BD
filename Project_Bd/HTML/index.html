@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Vendedores</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <div class="card shadow rounded-4">
+      <div class="card-body">
+        <h2 class="card-title text-center mb-4">Gestión de Vendedores</h2>
+
+        <form id="vendedorForm">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label for="codigo" class="form-label">Código</label>
+              <input type="text" class="form-control" id="codigo" name="codigo" required>
+            </div>
+            <div class="col-md-4">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="nombre" name="nombre" required>
+            </div>
+            <div class="col-md-4">
+              <label for="apellido" class="form-label">Apellido</label>
+              <input type="text" class="form-control" id="apellido" name="apellido" required>
+            </div>
+            <div class="col-md-4">
+              <label for="sueldo" class="form-label">Sueldo</label>
+              <input type="number" step="0.01" class="form-control" id="sueldo" name="sueldo" required>
+            </div>
+            <div class="col-md-4">
+              <label for="fecha" class="form-label">Fecha Ingreso</label>
+              <input type="date" class="form-control" id="fecha" name="fecha" required>
+            </div>
+            <div class="col-md-2">
+              <label for="tipo" class="form-label">Tipo</label>
+              <input type="text" class="form-control" id="tipo" name="tipo" required>
+            </div>
+            <div class="col-md-2">
+              <label for="distrito" class="form-label">Distrito</label>
+              <select class="form-select" id="distrito" name="distrito" required>
+                <option value="">Seleccione...</option>
+                <option value="D01">D01 - SURCO</option>
+                <option value="D02">D02 - JESUS MARIA</option>
+                <option value="D03">D03 - SAN ISIDRO</option>
+                <option value="D04">D04 - LA MOLINA</option>
+                <option value="D05">D05 - SAN MIGUEL</option>
+                <option value="D06">D06 - MIRAFLORES</option>
+                <option value="D07">D07 - BARRANCO</option>
+                <option value="D08">D08 - CHORRILLOS</option>
+                <option value="D09">D09 - SAN BORJA</option>
+                <option value="D10">D10 - LINCE</option>
+                <option value="D11">D11 - BREÑA</option>
+                <option value="D12">D12 - MAGDALENA</option>
+                <option value="D13">D13 - RIMAC</option>
+                <option value="D14">D14 - SURQUILLO</option>
+                <option value="D15">D15 - PUEBLO LIBRE</option>
+                <option value="D16">D16 - BELLAVISTA</option>
+                <option value="D17">D17 - CALLAO</option>
+                <option value="D18">D18 - SAN MARTIN DE PORRES</option>
+                <option value="D19">D19 - SANTA ANITA</option>
+                <option value="D20">D20 - LOS OLIVOS</option>
+                <option value="D21">D21 - INDEPENDENCIA</option>
+                <option value="D22">D22 - LIMA - CERCADO</option>
+                <option value="D24">D24 - SAN LUIS</option>
+                <option value="D25">D25 - EL AGUSTINO</option>
+                <option value="D26">D26 - SAN JUAN DE LURIGANCHO</option>
+                <option value="D27">D27 - ATE - VITARTE</option>
+                <option value="D28">D28 - SAN JUAN DE MIRAFLORES</option>
+                <option value="D29">D29 - CARMEN DE LA LEGUA</option>
+                <option value="D30">D30 - COMAS</option>
+                <option value="D31">D31 - VILLA MARIA DEL TRIUNFO</option>
+                <option value="D32">D32 - VILLA EL SALVADOR</option>
+                <option value="D33">D33 - LA PERLA</option>
+                <option value="D34">D34 - VENTANILLA</option>
+                <option value="D35">D35 - PUENTE PIEDRA</option>
+                <option value="D36">D36 - CARABAYLLO</option>
+                <option value="D37">D37 - SANTA MARIA</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mt-4 text-center">
+            <button type="submit" class="btn btn-primary">insertar</button>
+            <button type="button" class="btn btn-warning" onclick="actualizarVendedor()">Actualizar</button>
+            <button type="button" class="btn btn-danger" onclick="eliminarVendedor()">Eliminar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('vendedorForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const data = new FormData(event.target);
+      fetch('vendedor_insertar.php', {
+        method: 'POST',
+        body: data
+      }).then(res => res.text()).then(alert);
+    });
+
+    function actualizarVendedor() {
+      const data = new FormData(document.getElementById('vendedorForm'));
+      fetch('vendedor_actualizar.php', {
+        method: 'POST',
+        body: data
+      }).then(res => res.text()).then(alert);
+    }
+
+    function eliminarVendedor() {
+      const data = new FormData();
+      data.append('codigo', document.getElementById('codigo').value);
+      fetch('vendedor_eliminar.php', {
+        method: 'POST',
+        body: data
+      }).then(res => res.text()).then(alert);
+    }
+  </script>
+</body>
+</html>

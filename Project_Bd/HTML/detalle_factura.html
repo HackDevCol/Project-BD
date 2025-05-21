@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalle Factura</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <div class="card shadow rounded-4">
+      <div class="card-body">
+        <h2 class="card-title text-center mb-4">Detalle de Factura</h2>
+        <form id="detalleForm">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label for="num_fac" class="form-label">Nro. Factura</label>
+              <input type="text" class="form-control" id="num_fac" name="num_fac" required>
+            </div>
+            <div class="col-md-4">
+              <label for="cod_pro" class="form-label">Código Producto</label>
+              <input type="text" class="form-control" id="cod_pro" name="cod_pro" required>
+            </div>
+            <div class="col-md-2">
+              <label for="can_ven" class="form-label">Cantidad</label>
+              <input type="number" class="form-control" id="can_ven" name="can_ven" required>
+            </div>
+            <div class="col-md-2">
+              <label for="pre_ven" class="form-label">Precio</label>
+              <input type="number" step="0.01" class="form-control" id="pre_ven" name="pre_ven" required>
+            </div>
+          </div>
+
+          <div class="mt-4 text-center">
+            <button type="button" class="btn btn-warning" onclick="actualizarDetalle()">Actualizar</button>
+            <button type="button" class="btn btn-danger" onclick="eliminarDetalle()">Eliminar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    function actualizarDetalle() {
+      const data = new FormData(document.getElementById('detalleForm'));
+      fetch('detalle_factura_actualizar.php', {
+        method: 'POST',
+        body: data
+      }).then(r => r.text()).then(alert);
+    }
+
+    function eliminarDetalle() {
+      const data = new FormData();
+      data.append('num_fac', document.getElementById('num_fac').value);
+      data.append('cod_pro', document.getElementById('cod_pro').value);
+      fetch('detalle_factura_eliminar.php', {
+        method: 'POST',
+        body: data
+      }).then(r => r.text()).then(alert);
+    }
+  </script>
+</body>
+</html>

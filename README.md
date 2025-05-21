@@ -39,7 +39,7 @@ Este proyecto consiste en un sistema web básico de gestión comercial, desarrol
 ## 🖥️ Instalación local
 
 1. Clona este repositorio:
-git clone https://github.com/tuusuario/sistema-gestion-comercial.git
+git clone https://github.com/HackDevCol/Project-BD
 
 Importa la base de datos:
 
